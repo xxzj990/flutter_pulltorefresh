@@ -47,6 +47,7 @@ class SmartRefresher extends StatefulWidget {
   final OnRefresh onRefresh;
   // This method will callback when the indicator changes from edge to edge.
   final OnOffsetChange onOffsetChange;
+  final OnRawOffsetChange onRawOffsetChange;
   //controll inner state
   final RefreshController controller;
 
@@ -63,6 +64,7 @@ class SmartRefresher extends StatefulWidget {
     this.enablePullUp: default_enablePullUp,
     this.onRefresh,
     this.onOffsetChange,
+    this.onRawOffsetChange,
   })  : assert(child != null),
         controller = controller ?? new RefreshController(),this.headerBuilder= headerBuilder ?? ((BuildContext context, int mode){return new ClassicIndicator(mode:mode);}),
         this.footerBuilder= footerBuilder ?? ((BuildContext context, int mode){return new ClassicIndicator(mode:mode);}),
@@ -180,6 +182,11 @@ class _SmartRefresherState extends State<SmartRefresher> {
   }
 
   void _handleOffsetCallback(){
+
+    if(widget.onRawOffsetChange != null) {
+      widget.onRawOffsetChange(_scrollController.offset);
+    }
+
     final double overscrollPastStart = math.max(
         _scrollController.position.minScrollExtent -
             _scrollController.position.pixels+(widget.headerConfig is RefreshConfig&&(topModeLis.value == RefreshStatus.refreshing ||

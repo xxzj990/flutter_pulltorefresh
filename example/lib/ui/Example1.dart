@@ -94,6 +94,9 @@ class _Example1State extends State<Example1> {
               }
             },
             onOffsetChange: _onOffsetCallback,
+            onRawOffsetChange: (offset) {
+              print("offset:$offset");
+            },
             child: new ListView.builder(
               reverse: true,
               itemExtent: 100.0,

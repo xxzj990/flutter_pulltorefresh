@@ -8,6 +8,7 @@ import 'package:flutter/widgets.dart';
 
 
 typedef void OnRefresh(bool up);
+typedef void OnRawOffsetChange(double offset);
 typedef void OnOffsetChange(bool up, double offset);
 typedef Widget IndicatorBuilder(BuildContext context, int mode);
 
