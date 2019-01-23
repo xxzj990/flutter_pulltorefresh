@@ -251,13 +251,15 @@ class _SmartRefresherState extends State<SmartRefresher> {
     bottomModeLis.addListener(() {
       _didChangeMode(false, bottomModeLis);
     });
-    setState(() {
-      if (widget.enablePullDown)
-        _headerHeight = _headerKey.currentContext.size.height;
-      if (widget.enablePullUp) {
-        _footerHeight = _footerKey.currentContext.size.height;
-      }
-    });
+    if(mounted) {
+      setState(() {
+        if (widget.enablePullDown)
+          _headerHeight = _headerKey.currentContext.size.height;
+        if (widget.enablePullUp) {
+          _footerHeight = _footerKey.currentContext.size.height;
+        }
+      });
+    }
   }
 
   @override
